@@ -1,4 +1,15 @@
 import { Box, Color } from "@mui/material";
+
+export type ScheduleItemColor =
+  | "grey"
+  | "purple"
+  | "green"
+  | "teal"
+  | "red"
+  | "brown"
+  | "pink"
+  | "orange";
+
 import {
   grey,
   pink,
@@ -6,6 +17,7 @@ import {
   green,
   teal,
   red,
+  orange,
   brown,
 } from "@mui/material/colors";
 
@@ -14,13 +26,15 @@ const ScheduleItem = ({
   color = "grey",
 }: {
   title: string;
-  color?: "grey" | "purple" | "green" | "teal" | "red" | "brown" | "pink";
+  color?: ScheduleItemColor;
 }) => {
   let colorObj: Color = grey;
   switch (color) {
     case "grey":
       colorObj = grey;
       break;
+    case "orange":
+      colorObj = orange;
     case "purple":
       colorObj = purple;
       break;

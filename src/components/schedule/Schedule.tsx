@@ -12,7 +12,145 @@ import {
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import ScheduleTableCell from "./ScheduleTableCell";
-import ScheduleItem from "./ScheduleItem";
+import ScheduleItem, { ScheduleItemColor } from "./ScheduleItem";
+
+const data = [
+  {
+    time: "9 AM",
+    events: [
+      null,
+      null,
+      {
+        title: "Interview with Dan Smith",
+        color: "purple",
+      },
+      null,
+      null,
+    ],
+  },
+  {
+    time: "10 AM",
+    events: [
+      {
+        title: "Onboarding Session",
+        color: "orange",
+      },
+      null,
+      null,
+      {
+        title: "Interview for marketing",
+        color: "purple",
+      },
+      null,
+    ],
+  },
+  {
+    time: "11 AM",
+    events: [
+      null,
+      {
+        title: "Monthly Performance Review",
+        color: "grey",
+      },
+      null,
+      null,
+      {
+        title: "Project Kickoff for v2 Migration",
+        color: "green",
+      },
+    ],
+  },
+  {
+    time: "12 PM",
+    events: [
+      {
+        title: "Lunch break",
+        color: "pink",
+      },
+      null,
+      {
+        title: "Lunch break",
+        color: "pink",
+      },
+      null,
+      {
+        title: "Lunch break",
+        color: "pink",
+      },
+    ],
+  },
+  {
+    time: "1 PM",
+    events: [
+      null,
+      {
+        title: "Lunch break",
+        color: "pink",
+      },
+      null,
+      {
+        title: "Lunch break",
+        color: "pink",
+      },
+      null,
+    ],
+  },
+  {
+    time: "2 PM",
+    events: [
+      {
+        title: "Townhall Meeting",
+        color: "green",
+      },
+      null,
+      null,
+      null,
+      null,
+    ],
+  },
+  {
+    time: "3 PM",
+    events: [
+      null,
+      null,
+      {
+        title: "Benefits Orientation",
+        color: "green",
+      },
+      null,
+      {
+        title: "Performance Review",
+        color: "grey",
+      },
+    ],
+  },
+  {
+    time: "4 PM",
+    events: [
+      null,
+      {
+        title: "Recruitment Strategy",
+        color: "brown",
+      },
+      null,
+      null,
+      null,
+    ],
+  },
+  {
+    time: "5 PM",
+    events: [
+      null,
+      null,
+      null,
+      {
+        title: "Department Heads Sync",
+        color: "grey",
+      },
+      null,
+    ],
+  },
+];
 
 export default function Schedule() {
   return (
@@ -44,111 +182,21 @@ export default function Schedule() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <TableRow>
-              <ScheduleTableCell>9 AM</ScheduleTableCell>
-              <ScheduleTableCell></ScheduleTableCell>
-              <ScheduleTableCell></ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Interview with Dan Smith" color="purple" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>10 AM</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Onboarding Session" color="brown" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell></ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem
-                  title="Interview with marketing team"
-                  color="purple"
-                />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>11 AM</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Monthly Performance call" />
-              </ScheduleTableCell>
-              <ScheduleTableCell></ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="pink" />
-              </ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>12 PM</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="pink" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="pink" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="pink" />
-              </ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>1 PM</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="brown" />
-              </ScheduleTableCell>
-              <ScheduleTableCell></ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Lunch break" color="brown" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>2 PM</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Town Hall Meeting" color="green" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>3 PM</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Benefits Orientation" color="green" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Performance Review" color="green" />
-              </ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>4 PM</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Recruiting Strategy" color="brown" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
-            <TableRow>
-              <ScheduleTableCell>5 PM</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-              <ScheduleTableCell>
-                <ScheduleItem title="Department Heads" color="grey" />
-              </ScheduleTableCell>
-              <ScheduleTableCell>&nbsp;</ScheduleTableCell>
-            </TableRow>
+            {data.map((row) => (
+              <TableRow key={row.time}>
+                <ScheduleTableCell>{row.time}</ScheduleTableCell>
+                {row.events.map((event, i) => (
+                  <ScheduleTableCell key={`${row.time}-${i}`}>
+                    {event ? (
+                      <ScheduleItem
+                        title={event?.title}
+                        color={event?.color as ScheduleItemColor}
+                      />
+                    ) : null}
+                  </ScheduleTableCell>
+                ))}
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
