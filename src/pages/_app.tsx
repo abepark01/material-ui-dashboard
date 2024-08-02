@@ -99,7 +99,7 @@ const theme = createTheme({
           "&.Mui-selected": {
             // this is to refer to the prop provided by M-UI
             backgroundColor: "white", // updated backgroundColor
-            borderRadius: 4,
+            borderRadius: 16,
           },
         },
       },

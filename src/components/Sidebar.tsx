@@ -71,7 +71,7 @@ function Navigation({ onClose }: { onClose: () => void }) {
         </ListItemIcon>
         <ListItemText>Dashboard</ListItemText>
       </ListItemButton>
-      <Divider />
+      <Divider sx={{ mt: 2 }} />
       <ListSubheader>Team Management</ListSubheader>
       <ListItemButton>
         <ListItemIcon>
