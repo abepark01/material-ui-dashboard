@@ -1,3 +1,18 @@
+## Mockup
+Preview the project at https://material-ui-dashboard-drab.vercel.app/
+
+This project implements a prototype of the following mockup:
+![dashboard_mockup](https://github.com/user-attachments/assets/7ce5d967-ae29-4da3-9377-598350698114)
+
+
+## Technology Stack
+React v18
+Typescript
+material-ui v6 (next)
+Next.js v14
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
