@@ -2,13 +2,9 @@ import {
   Add,
   CalendarToday,
   Download,
-  GroupAdd,
-  GroupRemove,
   LightMode,
   Notifications,
-  People,
   Search,
-  Work,
 } from "@mui/icons-material";
 import {
   Box,
@@ -24,12 +20,12 @@ import {
   SelectChangeEvent,
   TextField,
   Typography,
-  Unstable_Grid2 as Grid2,
 } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
 import { grey } from "@mui/material/colors";
 import { Frequency } from "./types";
 import EmployeeStats from "./EmployeeStats";
+import { UserContext } from "@/context";
 
 const frequencies = [
   {
@@ -50,6 +46,8 @@ export default function Header() {
   const [selectedTimeframe, setSelectedTimeframe] =
     useState<Frequency>("monthly");
 
+  const userContext = useContext(UserContext);
+
   const selectedFormatted = useMemo(() => {
     return frequencies.find((freq) => freq.value === selectedTimeframe)?.name;
   }, [selectedTimeframe]);
@@ -57,7 +55,9 @@ export default function Header() {
     return (
       <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
         <LightMode color="warning" />
-        <Typography variant="body1">Good morning, Dean!</Typography>
+        <Typography variant="body1">
+          Good morning, {userContext?.user?.name}!
+        </Typography>
       </Box>
     );
   }
