@@ -9,11 +9,14 @@ import {
   CardHeader,
   IconButton,
   Paper,
+  TableCell,
+  Skeleton,
 } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import ScheduleTableCell from "./ScheduleTableCell";
 import ScheduleItem, { ScheduleItemColor } from "./ScheduleItem";
 import { grey } from "@mui/material/colors";
+import { useTasks } from "./api";
 
 const days = [
   {
@@ -176,6 +179,7 @@ type SelectedValues = {
 };
 
 export default function Schedule() {
+  const { isLoading, data } = useTasks();
   const [selectedDay, setSelectedDay] = useState<number>(0);
   const [selectedTimes, setSelectedTimes] = useState<SelectedValues>({
     3: true,
@@ -236,29 +240,52 @@ export default function Schedule() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row, i) => (
-              <TableRow
-                key={row.time}
-                sx={{ bgcolor: selectedTimes[i] ? grey[50] : "white" }}
-              >
-                <ScheduleTableCell
-                  sx={{ cursor: "pointer" }}
-                  onClick={() => handleToggleRowSelection(i)}
-                >
-                  {row.time}
-                </ScheduleTableCell>
-                {row.events.map((event, i) => (
-                  <ScheduleTableCell key={`${row.time}-${i}`}>
-                    {event ? (
-                      <ScheduleItem
-                        title={event?.title}
-                        color={event?.color as ScheduleItemColor}
-                      />
-                    ) : null}
-                  </ScheduleTableCell>
-                ))}
+            {isLoading && (
+              <TableRow>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
+                <TableCell>
+                  <Skeleton />
+                </TableCell>
               </TableRow>
-            ))}
+            )}
+            {!isLoading &&
+              data?.map((row, i) => (
+                <TableRow
+                  key={row.time}
+                  sx={{ bgcolor: selectedTimes[i] ? grey[50] : "white" }}
+                >
+                  <ScheduleTableCell
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => handleToggleRowSelection(i)}
+                  >
+                    {row.time}
+                  </ScheduleTableCell>
+                  {row.events.map((event, i) => (
+                    <ScheduleTableCell key={`${row.time}-${i}`}>
+                      {event ? (
+                        <ScheduleItem
+                          title={event?.title}
+                          color={event?.color as ScheduleItemColor}
+                        />
+                      ) : null}
+                    </ScheduleTableCell>
+                  ))}
+                </TableRow>
+              ))}
           </TableBody>
         </Table>
       </TableContainer>
