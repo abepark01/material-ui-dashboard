@@ -87,7 +87,7 @@ export function StatCard({
 
 export interface SimpleStatCardProps {
   title: string;
-  value: number;
+  value: number | undefined;
   Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
 }
 
