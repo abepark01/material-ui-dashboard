@@ -16,50 +16,15 @@ import {
   Skeleton,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { SimpleStatCard, SimpleStatCardProps } from "@/components/ui/stats";
 import { usePayrollStats } from "./api";
-import { useMemo } from "react";
+import StatCard from "@/components/ui/stats/StatCard";
+import StatCardHeader from "@/components/ui/stats/StatCardHeader";
+import { SimpleStatCardContent } from "@/components/ui/stats/SimpleStatCardContent";
+import EmployeeStats from "../dashboard/EmployeeStats";
 
 export default function EmployeePayrolls() {
   const { isLoading, data: payrollStats } = usePayrollStats();
 
-  const data: SimpleStatCardProps[] | undefined = useMemo(() => {
-    if (isLoading) {
-      return [];
-    }
-    return [
-      {
-        title: "Total payrolls",
-        value: payrollStats?.totalPayrollCount,
-        Icon: Bookmark,
-      },
-      {
-        title: "Draft",
-        value: payrollStats?.draftCount,
-        Icon: EditCalendar,
-      },
-      {
-        title: "Overdue",
-        value: payrollStats?.overdueCount,
-        Icon: CalendarToday,
-      },
-      {
-        title: "Failed",
-        value: payrollStats?.failedCount,
-        Icon: CreditCardOff,
-      },
-      {
-        title: "Scheduled",
-        value: payrollStats?.scheduledCount,
-        Icon: EventAvailable,
-      },
-      {
-        title: "Paid",
-        value: payrollStats?.paidCount,
-        Icon: BookmarkAdded,
-      },
-    ];
-  }, [payrollStats, isLoading]);
   return (
     <Card>
       <CardHeader
@@ -72,18 +37,79 @@ export default function EmployeePayrolls() {
         }
       />
       <CardContent sx={{ bgcolor: grey[100] }}>
-        {isLoading && <Skeleton />}
         <Grid spacing={2} container>
-          {!isLoading &&
-            data?.map((stat, i) => (
-              <Grid size={{ xs: 12, md: 4, lg: 2 }} key={i}>
-                <SimpleStatCard
-                  title={stat.title}
-                  value={stat.value}
-                  Icon={stat.Icon}
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Total Payrolls" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.totalPayrollCount}
+                  Icon={Bookmark}
                 />
-              </Grid>
-            ))}
+              )}
+            </StatCard>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Drafts" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.draftCount}
+                  Icon={EditCalendar}
+                />
+              )}
+            </StatCard>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Overdue" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.overdueCount}
+                  Icon={CalendarToday}
+                />
+              )}
+            </StatCard>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Failed" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.failedCount}
+                  Icon={CreditCardOff}
+                />
+              )}
+            </StatCard>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Scheduled" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.totalPayrollCount}
+                  Icon={EventAvailable}
+                />
+              )}
+            </StatCard>
+          </Grid>
+          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
+            <StatCard>
+              <StatCardHeader title="Paid" />
+              {isLoading && <Skeleton width="100%" />}
+              {payrollStats && (
+                <SimpleStatCardContent
+                  value={payrollStats?.paidCount}
+                  Icon={BookmarkAdded}
+                />
+              )}
+            </StatCard>
+          </Grid>
         </Grid>
       </CardContent>
     </Card>

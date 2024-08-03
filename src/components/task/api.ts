@@ -110,7 +110,7 @@ function getData(): Promise<Task[]> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 3000);
+    }, 1000);
   });
 }
 

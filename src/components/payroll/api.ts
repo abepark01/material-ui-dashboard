@@ -14,7 +14,7 @@ async function getPayrollStats() {
   return new Promise<PayrollStats>((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 2000);
+    }, 1000);
   });
 }
 

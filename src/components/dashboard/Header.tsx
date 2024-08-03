@@ -28,7 +28,8 @@ import {
 } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { grey } from "@mui/material/colors";
-import { StatCard, StatCardProps } from "@/components/ui/stats";
+import { Frequency } from "./types";
+import EmployeeStats from "./EmployeeStats";
 
 const frequencies = [
   {
@@ -45,41 +46,9 @@ const frequencies = [
   },
 ];
 
-const data: StatCardProps[] = [
-  {
-    title: "Total employee",
-    value: 234,
-    deltaUnit: "last month",
-    delta: 5,
-    Icon: People,
-  },
-  {
-    title: "New employee",
-    value: 42,
-    deltaUnit: "last month",
-    delta: 5,
-    Icon: GroupAdd,
-  },
-  {
-    title: "Resigned employee",
-    value: 42,
-    deltaUnit: "last month",
-    delta: 5,
-    Icon: GroupRemove,
-  },
-  {
-    title: "Job applicants",
-    value: 367,
-    deltaUnit: "last month",
-    delta: 10,
-    Icon: Work,
-  },
-];
-
 export default function Header() {
-  const [selectedTimeframe, setSelectedTimeframe] = useState<
-    string | undefined
-  >("monthly");
+  const [selectedTimeframe, setSelectedTimeframe] =
+    useState<Frequency>("monthly");
 
   const selectedFormatted = useMemo(() => {
     return frequencies.find((freq) => freq.value === selectedTimeframe)?.name;
@@ -93,7 +62,7 @@ export default function Header() {
     );
   }
   function handleTimeframeSelect(e: SelectChangeEvent) {
-    setSelectedTimeframe(e?.target?.value);
+    setSelectedTimeframe(e?.target?.value as Frequency);
   }
 
   function renderAction() {
@@ -199,19 +168,7 @@ export default function Header() {
             </Button>
           </Box>
         </Box>
-        <Grid2 container spacing={{ xs: 1, md: 2 }}>
-          {data.map((stat, i) => (
-            <Grid2 size={{ xs: 12, md: 6, lg: 3 }} key={i}>
-              <StatCard
-                Icon={stat.Icon}
-                title={stat.title}
-                value={stat.value}
-                delta={stat.delta}
-                deltaUnit={stat.deltaUnit}
-              />
-            </Grid2>
-          ))}
-        </Grid2>
+        <EmployeeStats frequency={selectedTimeframe} />
       </CardContent>
     </Card>
   );

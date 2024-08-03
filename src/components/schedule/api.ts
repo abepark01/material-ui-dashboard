@@ -147,7 +147,7 @@ function getTasks() {
   return new Promise<Schedule[]>((resolve) => {
     setTimeout(() => {
       resolve(data);
-    }, 2000);
+    }, 1000);
   });
 }
 
