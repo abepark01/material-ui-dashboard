@@ -15,7 +15,40 @@ import {
   Unstable_Grid2 as Grid,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
-import { SimpleStatCard } from "@/components/ui/stats";
+import { SimpleStatCard, SimpleStatCardProps } from "@/components/ui/stats";
+
+const data: SimpleStatCardProps[] = [
+  {
+    title: "Total payrolls",
+    value: 268,
+    Icon: Bookmark,
+  },
+  {
+    title: "Draft",
+    value: 13,
+    Icon: EditCalendar,
+  },
+  {
+    title: "Overdue",
+    value: 7,
+    Icon: CalendarToday,
+  },
+  {
+    title: "Failed",
+    value: 5,
+    Icon: CreditCardOff,
+  },
+  {
+    title: "Scheduled",
+    value: 24,
+    Icon: EventAvailable,
+  },
+  {
+    title: "Paid",
+    value: 24,
+    Icon: BookmarkAdded,
+  },
+];
 
 export default function EmployeePayrolls() {
   return (
@@ -31,28 +64,15 @@ export default function EmployeePayrolls() {
       />
       <CardContent sx={{ bgcolor: grey[100] }}>
         <Grid spacing={2} container>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard
-              title="Total payrolls"
-              value={268}
-              Icon={Bookmark}
-            />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard title="Draft" value={13} Icon={EditCalendar} />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard title="Overdue" value={5} Icon={CalendarToday} />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard title="Failed" value={5} Icon={CreditCardOff} />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard title="Scheduled" value={5} Icon={EventAvailable} />
-          </Grid>
-          <Grid size={{ xs: 12, md: 4, lg: 2 }}>
-            <SimpleStatCard title="Paid" value={5} Icon={BookmarkAdded} />
-          </Grid>
+          {data.map((stat, i) => (
+            <Grid size={{ xs: 12, md: 4, lg: 2 }} key={i}>
+              <SimpleStatCard
+                title={stat.title}
+                value={stat.value}
+                Icon={stat.Icon}
+              />
+            </Grid>
+          ))}
         </Grid>
       </CardContent>
     </Card>

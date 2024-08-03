@@ -28,7 +28,7 @@ import {
 } from "@mui/material";
 import React, { useMemo, useState } from "react";
 import { grey } from "@mui/material/colors";
-import { StatCard } from "@/components/ui/stats";
+import { StatCard, StatCardProps } from "@/components/ui/stats";
 
 const frequencies = [
   {
@@ -42,6 +42,37 @@ const frequencies = [
   {
     name: "Yearly",
     value: "yearly",
+  },
+];
+
+const data: StatCardProps[] = [
+  {
+    title: "Total employee",
+    value: 234,
+    deltaUnit: "last month",
+    delta: 5,
+    Icon: People,
+  },
+  {
+    title: "New employee",
+    value: 42,
+    deltaUnit: "last month",
+    delta: 5,
+    Icon: GroupAdd,
+  },
+  {
+    title: "Resigned employee",
+    value: 42,
+    deltaUnit: "last month",
+    delta: 5,
+    Icon: GroupRemove,
+  },
+  {
+    title: "Job applicants",
+    value: 367,
+    deltaUnit: "last month",
+    delta: 10,
+    Icon: Work,
   },
 ];
 
@@ -169,42 +200,17 @@ export default function Header() {
           </Box>
         </Box>
         <Grid2 container spacing={{ xs: 1, md: 2 }}>
-          <Grid2 size={{ xs: 12, md: 6, lg: 3 }}>
-            <StatCard
-              Icon={People}
-              title="Total Employees"
-              stat={234}
-              delta={5}
-              statUnit="last month"
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6, lg: 3 }}>
-            <StatCard
-              Icon={GroupAdd}
-              title="New Employee"
-              stat={432}
-              delta={5}
-              statUnit="last month"
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6, lg: 3 }}>
-            <StatCard
-              Icon={GroupRemove}
-              title="Resigned Employee"
-              stat={12}
-              delta={2}
-              statUnit="last month"
-            />
-          </Grid2>
-          <Grid2 size={{ xs: 12, md: 6, lg: 3 }}>
-            <StatCard
-              Icon={Work}
-              title="Job Applicants"
-              stat={367}
-              delta={10}
-              statUnit="last month"
-            />
-          </Grid2>
+          {data.map((stat, i) => (
+            <Grid2 size={{ xs: 12, md: 6, lg: 3 }} key={i}>
+              <StatCard
+                Icon={stat.Icon}
+                title={stat.title}
+                value={stat.value}
+                delta={stat.delta}
+                deltaUnit={stat.deltaUnit}
+              />
+            </Grid2>
+          ))}
         </Grid2>
       </CardContent>
     </Card>

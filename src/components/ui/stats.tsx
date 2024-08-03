@@ -10,21 +10,21 @@ import {
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import React, { useMemo } from "react";
 
-export interface StateCardProps {
+export interface StatCardProps {
   title: string;
-  stat: number;
-  statUnit: string;
+  value: number;
+  deltaUnit: string;
   delta: number;
   Icon: OverridableComponent<SvgIconTypeMap<{}, "svg">> & { muiName: string };
 }
 
 export function StatCard({
   title,
-  stat,
+  value,
   delta,
-  statUnit,
+  deltaUnit,
   Icon,
-}: StateCardProps) {
+}: StatCardProps) {
   const theme = useTheme();
   const deltaFormatted = useMemo(() => {
     if (delta > 0) {
@@ -64,7 +64,7 @@ export function StatCard({
           </Typography>
         </Box>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography sx={{ fontWeight: "bold" }}>{stat}</Typography>
+          <Typography sx={{ fontWeight: "bold" }}>{value}</Typography>
           <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
             <Box
               sx={{
@@ -77,7 +77,7 @@ export function StatCard({
               <Outbound fontSize="small" />
               <Typography variant="body2">{deltaFormatted}</Typography>
             </Box>
-            <Typography variant="body2">{statUnit}</Typography>
+            <Typography variant="body2">{deltaUnit}</Typography>
           </Box>
         </Box>
       </CardContent>
