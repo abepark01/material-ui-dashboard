@@ -1,3 +1,4 @@
+import { UserContext } from "@/context";
 import {
   AddAlarm,
   Assignment,
@@ -28,7 +29,7 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -37,6 +38,7 @@ interface SidebarProps {
 }
 
 function Navigation({ onClose }: { onClose: () => void }) {
+  const userContext = useContext(UserContext);
   return (
     <List>
       <ListSubheader
@@ -59,7 +61,7 @@ function Navigation({ onClose }: { onClose: () => void }) {
           >
             <Interests />
           </IconButton>
-          <Typography variant="body2">ACME</Typography>
+          <Typography variant="body2">{userContext.company.name}</Typography>
         </Box>
         <IconButton onClick={onClose}>
           <ViewSidebar />
