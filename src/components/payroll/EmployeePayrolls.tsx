@@ -14,6 +14,8 @@ import {
   IconButton,
   Unstable_Grid2 as Grid,
   Skeleton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { usePayrollStats } from "./api";
@@ -21,9 +23,20 @@ import StatCard from "@/components/ui/stats/StatCard";
 import StatCardHeader from "@/components/ui/stats/StatCardHeader";
 import { SimpleStatCardContent } from "@/components/ui/stats/SimpleStatCardContent";
 import EmployeeStats from "../dashboard/EmployeeStats";
+import { useState } from "react";
 
 export default function EmployeePayrolls() {
   const { isLoading, data: payrollStats } = usePayrollStats();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Card>
@@ -31,9 +44,28 @@ export default function EmployeePayrolls() {
         title="Employee Payrolls"
         titleTypographyProps={{ variant: "body1" }}
         action={
-          <IconButton>
-            <MoreHoriz />
-          </IconButton>
+          <>
+            <IconButton id="payroll-actions-button" onClick={handleClick}>
+              <MoreHoriz />
+            </IconButton>
+
+            <Menu
+              id="payroll-actions-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "payroll-actions-button",
+              }}
+            >
+              <MenuItem onClick={handleClose} disabled={isLoading}>
+                Refresh
+              </MenuItem>
+              <MenuItem onClick={handleClose} disabled={isLoading}>
+                Export to CSV
+              </MenuItem>
+            </Menu>
+          </>
         }
       />
       <CardContent sx={{ bgcolor: grey[100] }}>

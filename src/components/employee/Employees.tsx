@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableHead,
@@ -13,6 +13,8 @@ import {
   Paper,
   Avatar,
   Skeleton,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import {
   CheckCircleOutline,
@@ -23,6 +25,17 @@ import { useEmployees } from "./api";
 
 export default function EmployeesTable() {
   const { isLoading, data } = useEmployees();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Card
       sx={{
@@ -33,9 +46,28 @@ export default function EmployeesTable() {
         title="Employees"
         titleTypographyProps={{ variant: "body1" }}
         action={
-          <IconButton>
-            <MoreHoriz />
-          </IconButton>
+          <>
+            <IconButton onClick={handleClick}>
+              <MoreHoriz />
+            </IconButton>
+
+            <Menu
+              id="employee-actions-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                "aria-labelledby": "employee-actions-button",
+              }}
+            >
+              <MenuItem onClick={handleClose} disabled={isLoading}>
+                Email Employees
+              </MenuItem>
+              <MenuItem onClick={handleClose} disabled={isLoading}>
+                Export to CSV
+              </MenuItem>
+            </Menu>
+          </>
         }
       />
 
