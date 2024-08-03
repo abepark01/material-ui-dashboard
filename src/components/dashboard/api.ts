@@ -23,7 +23,7 @@ const allData = {
   yearly: {
     totalEmployeeCount: {
       value: 200,
-      delta: 10,
+      delta: -10,
     },
     newEmployeeCount: {
       value: 100,
