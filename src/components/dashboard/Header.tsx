@@ -81,6 +81,9 @@ export default function Header() {
             placeholder="Quick search"
             size="small"
             InputProps={{
+              sx: {
+                px: 0.5,
+              },
               startAdornment: (
                 <InputAdornment position="start">
                   <Search fontSize="small" />
