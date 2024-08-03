@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Table,
   TableHead,
@@ -13,6 +13,25 @@ import {
 import { Add } from "@mui/icons-material";
 import ScheduleTableCell from "./ScheduleTableCell";
 import ScheduleItem, { ScheduleItemColor } from "./ScheduleItem";
+import { grey } from "@mui/material/colors";
+
+const days = [
+  {
+    title: "Mon 20",
+  },
+  {
+    title: "Tue 21",
+  },
+  {
+    title: "Wed 22",
+  },
+  {
+    title: "Thu 23",
+  },
+  {
+    title: "Fri 24",
+  },
+];
 
 const data = [
   {
@@ -152,7 +171,31 @@ const data = [
   },
 ];
 
+type SelectedValues = {
+  [key: number]: boolean;
+};
+
 export default function Schedule() {
+  const [selectedDay, setSelectedDay] = useState<number>(0);
+  const [selectedTimes, setSelectedTimes] = useState<SelectedValues>({
+    3: true,
+    4: true,
+  });
+
+  function handleToggleDaySelection(i: number) {
+    setSelectedDay(i);
+  }
+  function handleToggleRowSelection(i: number) {
+    setSelectedTimes((selection) => {
+      const updated = { ...selection };
+      if (updated[i]) {
+        delete updated[i];
+      } else {
+        updated[i] = true;
+      }
+      return updated;
+    });
+  }
   return (
     <Card
       sx={{
@@ -174,17 +217,36 @@ export default function Schedule() {
           <TableHead>
             <TableRow>
               <ScheduleTableCell>Time</ScheduleTableCell>
-              <ScheduleTableCell>Mon 21</ScheduleTableCell>
-              <ScheduleTableCell>Tue 22</ScheduleTableCell>
-              <ScheduleTableCell>Wed 23</ScheduleTableCell>
-              <ScheduleTableCell>Thu 24</ScheduleTableCell>
-              <ScheduleTableCell>Fri 25</ScheduleTableCell>
+              {days.map((day, i) => (
+                <ScheduleTableCell
+                  key={day.title}
+                  sx={{
+                    bgcolor: selectedDay === i ? "white" : grey[50],
+                    cursor: "pointer",
+                    borderBottom: (theme) =>
+                      selectedDay === i
+                        ? `2px solid ${theme.palette.primary.main}`
+                        : "none",
+                  }}
+                  onClick={() => handleToggleDaySelection(i)}
+                >
+                  {day.title}
+                </ScheduleTableCell>
+              ))}
             </TableRow>
           </TableHead>
           <TableBody>
-            {data.map((row) => (
-              <TableRow key={row.time}>
-                <ScheduleTableCell>{row.time}</ScheduleTableCell>
+            {data.map((row, i) => (
+              <TableRow
+                key={row.time}
+                sx={{ bgcolor: selectedTimes[i] ? grey[50] : "white" }}
+              >
+                <ScheduleTableCell
+                  sx={{ cursor: "pointer" }}
+                  onClick={() => handleToggleRowSelection(i)}
+                >
+                  {row.time}
+                </ScheduleTableCell>
                 {row.events.map((event, i) => (
                   <ScheduleTableCell key={`${row.time}-${i}`}>
                     {event ? (
