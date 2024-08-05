@@ -33,10 +33,10 @@ export default function DashboardPage() {
           <Header />
           <Box sx={{ py: 0, px: { md: 2 }, flexGrow: 1 }}>
             <Grid container spacing={{ md: 2 }} alignItems="stretch">
-              <Grid size={{ xs: 12, xl: 6 }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <Tasks />
               </Grid>
-              <Grid size={{ xs: 12, xl: 6 }}>
+              <Grid size={{ xs: 12, lg: 6 }}>
                 <Schedule />
               </Grid>
             </Grid>
