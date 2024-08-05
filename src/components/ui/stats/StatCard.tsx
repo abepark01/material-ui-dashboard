@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export default function StatCard({ children }: { children: ReactNode }) {
   return (
-    <Card sx={{ flex: 1, minWidth: { md: 200 } }}>
+    <Card sx={{ flex: 1 }}>
       <CardContent>{children}</CardContent>
     </Card>
   );

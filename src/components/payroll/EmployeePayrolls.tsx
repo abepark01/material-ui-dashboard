@@ -16,6 +16,7 @@ import {
   Skeleton,
   Menu,
   MenuItem,
+  Box,
 } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import { usePayrollStats } from "./api";
